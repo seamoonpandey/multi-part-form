@@ -3,6 +3,9 @@
     flex-direction: column;
     gap: 50px;
     width: 75%;
+    border: 2px solid #ECECEC;
+    border-radius: 13px;
+    padding: 50px;
 }
 
 
@@ -94,4 +97,23 @@
     display: flex;
     justify-content: end;
     gap: 32px;
+}
+
+.genderOption {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.genderOption>select {
+    width: 300px;
+    aspect-ratio: 11/2;
+    background: #ffffff;
+    border: 1px solid #ECECEC;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.genderOption>select>option {
+    cursor: pointer;
 }

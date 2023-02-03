@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import classes from './index.module.css';
+
 import { Next, Previous, Submit } from "@/components/ui/buttons/next";
 
 export default function Home() {
@@ -263,7 +264,6 @@ export default function Home() {
 
   const legalNameRef = useRef('');
   const nickNameRef = useRef('');
-  const [show, setShow] = useState(false);
 
 
   const InputText = ({ label, required, type, placeholder, ref }) => (
@@ -336,7 +336,7 @@ export default function Home() {
       <InputText label='Nick Name'
         type='text'
       />
-      <div>
+      <div className={classes.genderOption}>
         <label htmlFor="gender">Gender</label>
         <select name="Gender">
           <option value="" disabled selected hidden>Select One</option>
@@ -422,7 +422,7 @@ export default function Home() {
     </div>
     <div className={classes.buttonpositions}>
       {page === 1 && (<Previous onPress={prevHandler} />)}
-      {page != 2 && (<Next onPress={nextHandler} />)}
+      {page !== 2 && (<Next onPress={nextHandler} />)}
       {page === 2 && (<Submit onPress={submitHandler} />)}
     </div>
 
