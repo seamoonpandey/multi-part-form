@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+
+import classes from './index.module.css';
+import { Next, Previous, Submit } from "@/components/ui/buttons/next";
 
 export default function Home() {
 
@@ -248,137 +250,181 @@ export default function Home() {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
+  const Province = [
+    { "name": "Province 1" },
+    { "name": "Madesh Kshetra" },
+    { "name": "Bagmati Kshetra" },
+    { "name": "Gandaki Kshetra" },
+    { "name": "Lumbini Kshetra" },
+    { "name": "Karnali Kshetra" },
+    { "name": "Mahakali Kshetra" }
+  ];
 
 
   const legalNameRef = useRef('');
   const nickNameRef = useRef('');
   const [show, setShow] = useState(false);
-  const { register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid }
-  } = useForm({ mode: "all" });
 
-  // const InputText = ({ label, required, type, placeholder, ref }) => (
 
-  //   <div>
-  //     <label htmlFor={label}>{label}</label>
-  //     <input
-  //       type={type}
-  //       name={label}
-  //       required={required}
-  //       placeholder={placeholder}
-  //       ref={ref}
-  //     />
-  //   </div>
-  // )
+  const InputText = ({ label, required, type, placeholder, ref }) => (
 
-  // const InputAddress = ({ label, required }) => (
-  //   <div>
-  //     <label htmlFor={label.trim()}>{label}</label>
-  //     <select>
-  //       <option value="Nepal">Nepal</option>
-  //       {AllCountry.map(country =>
-  //         (<option value={country.name}>{country.name}</option>)
-  //       )}
-  //     </select>
-  //     <select>
-  //       <option value="Select Province" disabled selected hidden>Select Province</option>
-  //     </select>
-  //     <select>
-  //       <option value="Select District"></option>
-  //     </select>
-  //   </div>
-  // )
+    <div className={classes.action}>
+      <label htmlFor={label}>{label}</label>
+      <input
+        type={type}
+        name={label}
+        required={required}
+        placeholder={placeholder}
+        ref={ref}
+      />
+    </div>
+  )
+  const InputImage = ({ label, required, type, placeholder, ref }) => (
 
-  // const PersonalInfo = () => (
-  //   <section>
-  //     <InputText label='Upload Photo'
-  //       type='img'
-  //       placeholder='Browse Photo'
-  //     />
-  //     <InputText label='Legal Name'
-  //       type='text'
-  //       required='true'
-  //     />
-  //     <InputText label='Nick Name'
-  //       type='text'
-  //     />
-  //     <select name="Gender">
-  //       <option value="" disabled selected hidden>Select One</option>
-  //       <option value="male">male</option>
-  //       <option value="female">female</option>
-  //     </select>
-  //   </section>
-  // )
+    <div className={classes.action}>
+      <label htmlFor={label}>{label}</label>
+      <input
+        style={{ height: '100px', width: '100px' }}
+        type={type}
+        name={label}
+        required={required}
+        placeholder={placeholder}
+        ref={ref}
+      />
+    </div>
+  )
 
-  // const ContactInfo = () => (
-  //   <section>
-  //     <InputText
-  //       label='Email Address'
-  //       type='email'
-  //     />
-  //     <InputText
-  //       label='Primary Contact'
-  //       required
-  //       type='text'
-  //     />
-  //     <InputText
-  //       label='Secondary Contact'
-  //       required
-  //       type='text'
-  //     />
-  //     <InputAddress label='Primary Address' />
-  //     {/* <select>
-  //       <option value="Nepal">Nepal</option>
-  //       {AllCountry.map(country =>
-  //         (<option value={country.name}>{country.name}</option>)
-  //       )}
-  //     </select> */}
-  //   </section>
-  // )
+  const InputAddress = ({ label, required }) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <label htmlFor={label.trim()}>{label}</label>
+      <div className={classes.grid}>
+        <select>
+          <option value="Nepal" disabled selected hidden>Nepal</option>
+          {AllCountry.map(country =>
+            (<option value={country.name}>{country.name}</option>)
+          )}
+        </select>
+        <select>
+          <option value="Select Province" disabled selected hidden>Select Province</option>
+          {Province.map(province =>
+            (<option value={province.name}>{province.name}</option>))}
+        </select>
+        <select>
+          <option disabled selected hidden>Select District</option>
+        </select>
+        <select>
+          <option>Select Municipality</option>
+        </select>
+        <select>
+          <option >Select Ward</option>
+        </select>
+      </div>
+    </div>
+  )
+
+  const PersonalInfo = () => (
+    <div className={classes.forms}>
+      <InputImage label='Upload Photo'
+        type='file'
+        placeholder='Browse Photo'
+
+      />
+      <InputText label='Legal Name'
+        type='text'
+        required='true'
+      />
+      <InputText label='Nick Name'
+        type='text'
+      />
+      <div>
+        <label htmlFor="gender">Gender</label>
+        <select name="Gender">
+          <option value="" disabled selected hidden>Select One</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+        </select>
+      </div>
+      <InputText
+        label='Date of Birth'
+        type='date' />
+      <InputText label='Age'
+        type='String'
+        required />
+    </div>
+  )
+
+  const ContactInfo = () => (
+    <div className={classes.forms}>
+      <InputText
+        label='Email Address'
+        type='email'
+      />
+      <InputText
+        label='Primary Contact'
+        required
+        type='text'
+      />
+      <InputText
+        label='Secondary Contact'
+        required
+        type='text'
+      />
+      <InputAddress label='Permanent Address' required />
+      <InputAddress label='Temporary Address 1' />
+    </div>
+  )
+
+  const ReviewInfo = () => {
+
+  }
 
   const [page, setPage] = useState(0);
 
-  function nexthandler() {
+  function nextHandler() {
     setPage(page + 1);
   }
-  function prevhandler() {
+  function prevHandler() {
     setPage(page - 1);
   }
+  function submitHandler() {
+    console.log("submit?");
+  }
 
-  const Page1 = () => (
-    <div>
-      hello how do you do page 1.
-    </div>
-  )
-  const Page2 = () => (
-    <div>
-      hello how do you do page 2.
-    </div>
-  )
-  const Page3 = () => (
-    <div>
-      hello how do you do page 3.
-    </div>
+  const NavBar = () => (
+    <nav className={classes.navigation}>
+      <div onClick={() => setPage(0)}>
+        <span className={classes.round} style={{ background: page === 0 ? '#0094FF' : '#909090' }}>1</span>
+        <span className={classes.navtext} style={{ color: page === 0 ? '#0094FF' : '#909090' }}>Personal Info</span>
+        <span className={classes.gap} style={{ background: page === 0 ? '#0094FF' : '#909090' }}></span>
+      </div>
+      <div onClick={() => setPage(1)}>
+        <span className={classes.round} style={{ background: page === 1 ? '#0094FF' : '#909090' }}>2</span>
+        <span className={classes.navtext} style={{ color: page === 1 ? '#0094FF' : '#909090' }}>Contact Info</span>
+        <span className={classes.gap} style={{ background: page === 1 ? '#0094FF' : '#909090' }}></span>
+      </div>
+      <div onClick={() => setPage(2)}>
+        <span className={classes.round} style={{ background: page === 2 ? '#0094FF' : '#909090' }}>3</span>
+        <span className={classes.navtext} style={{ color: page === 2 ? '#0094FF' : '#909090' }}>Review Info</span>
+      </div>
+    </nav>
   )
 
-
-  const total = [
-    <Page1 />,
-    <Page2 />,
-    <Page3 />
+  const AllPage = [
+    <PersonalInfo />,
+    <ContactInfo />,
+    <ReviewInfo />
   ]
 
-  return <div>
-    {/* <PersonalInfo />
-    <ContactInfo /> */}
+  return <div className={classes.bodyform}>
+    <NavBar />
     <div>
-      {total[page]}
+      {AllPage[page]}
     </div>
-    <div>
-      {page != 2 && (<button onClick={nexthandler}>next</button>)}
-      {page != 0 && (<button onClick={prevhandler}>previous</button>)}
+    <div className={classes.buttonpositions}>
+      {page === 1 && (<Previous onPress={prevHandler} />)}
+      {page != 2 && (<Next onPress={nextHandler} />)}
+      {page === 2 && (<Submit onPress={submitHandler} />)}
     </div>
+
   </div>
 }
